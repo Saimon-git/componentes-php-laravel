@@ -2,62 +2,44 @@
 
 namespace SimonMontoya;
 
+use Closure;
+
 class Container
 {
-    protected static $container;
     protected $shared = array();
+    protected $bindings = array();
 
-    public static function getInstance()
+    public function bind($name, $resolver)
     {
-        if (static::$container == null) {
-            static::$container = new Container;
-        }
-
-        return static::$container;
+        $this->bindings[$name] = [
+            'resolver' => $resolver,
+        ];
     }
 
-    public static function setContainer(Container $container)
+    public function instance($name, $object)
     {
-        static::$container = $container;
-    }
-
-    public static function clearContainer()
-    {
-        static::$container = null;
-    }
-
-    public function session()
-    {
-        if (isset($this->shared['session'])) {
-            return $this->shared['session'];
-        }
-        $data = array(
-            'user_data' => array(
-                'name' => 'Duilio',
-                'role' => 'teacher'
-            )
-        );
+        $this->shared[$name] = $object;
         
-        $driver = new SessionArrayDriver($data);
-
-        return $this->shared['session'] = new SessionManager($driver);
-
     }
 
-    public function auth()
+    public function make($name)
     {
-        if (isset($this->shared['auth'])) {
-            return $this->shared['auth'];
+        if (isset($this->shared[$name])) {
+            return $this->shared[$name];
         }
-        return $this->shared['auth'] = new Authenticator($this->session());
+        
+        $resolver = $this->bindings[$name]['resolver'];
+
+        if ($resolver instanceof Closure) {
+            $object = $resolver($this);
+        }else{
+            $object = new $resolver;
+        }
+
+        
+
+        return $object;
     }
 
-    public function access()
-    {
-        if (isset($this->shared['access'])) {
-            return $this->shared['access'];
-        }
-        return $this->shared['access'] = new AccessHandler($this->auth());
-    }
     
 }
