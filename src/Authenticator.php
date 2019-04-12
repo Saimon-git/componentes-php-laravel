@@ -1,34 +1,44 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: simon
- * Date: 22/03/19
- * Time: 03:45 PM
- */
 
 namespace SimonMontoya;
 
 use SimonMontoya\SessionManager as Session;
 
-class Authenticator
+class Authenticator implements AuthenticatorInterface
 {
-    protected static $user;
+    /**
+     * @var \SimonMontoya\SessionManager
+     */
+    protected $session;
 
-    public static function check()
+    /**
+     * @var \SimonMontoya\User
+     */
+    protected $user;
+
+    /**
+     * @param \SimonMontoya\SessionManager $session
+     */
+    public function __construct(Session $session)
     {
-        return static::user() != null;
+        $this->session = $session;
     }
 
-    public static function user()
+    public function check()
     {
-        if(static::$user != null){
-           return static::$user;
+        return $this->user() != null;
+    }
+
+    public function user()
+    {
+        if ($this->user != null) {
+            return $this->user;
         }
 
-        $data = Session::get('user_data');
+        $data = $this->session->get('user_data');
 
-        if (! is_null($data)){
-           return static::$user = new User($data);
+        if ( ! is_null($data)) {
+            return $this->user = new User($data);
         }
 
         return null;

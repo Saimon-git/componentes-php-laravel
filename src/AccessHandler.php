@@ -1,13 +1,29 @@
 <?php
-namespace SimonMontoya;
 
-use SimonMontoya\Authenticator as Auth;
+namespace SimonMontoya;
 
 class AccessHandler
 {
-    public static function check($role)
+    /**
+     * @var \SimonMontoya\AuthenticatorInterface
+     */
+    protected $auth;
+
+    /**
+     * @param \SimonMontoya\AuthenticatorInterface $auth
+     */
+    public function __construct(AuthenticatorInterface $auth)
     {
-        return Auth::check() && Auth::user()->role === $role;
+        $this->auth = $auth;
     }
-    
+
+    public function check($roles)
+    {
+        if (!is_array($roles)) {
+            $roles = explode('|', $roles);
+        }
+
+        return $this->auth->check() && in_array($this->auth->user()->role, $roles);
+    }
+
 }

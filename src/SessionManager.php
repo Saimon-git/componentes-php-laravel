@@ -1,35 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: simon
- * Date: 22/03/19
- * Time: 03:50 PM
- */
+
 
 namespace SimonMontoya;
 
-
 class SessionManager
 {
-    protected static $loaded = false;
-    protected static $data = array();
+    protected $driver;
+    protected $data = array();
 
-    protected static function load()
+    public function __construct(SessionDriverInterface $driver)
     {
-        if(static::$loaded) return;
+        $this->driver = $driver;
 
-        static::$data = SessionFileDriver::load();
-
-        static ::$loaded = true;
+        $this->load();
     }
 
-
-    public static function get($key)
+    protected function load()
     {
-        static::load();
+        $this->data = $this->driver->load();
+    }
 
-        return isset(static::$data[$key])
-            ? static::$data[$key]
+    public function get($key)
+    {
+        return isset($this->data[$key])
+            ? $this->data[$key]
             : null;
     }
 

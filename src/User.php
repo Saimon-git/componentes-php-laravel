@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: simon
- * Date: 22/03/19
- * Time: 04:35 PM
- */
 
 namespace SimonMontoya;
 
-
 class User
 {
+
     protected $attributes;
 
     public function __construct(array $attributes = array())
@@ -22,7 +16,6 @@ class User
     {
         return isset($this->attributes[$var])
             ? $this->attributes[$var]
-            : null ;
+            : null;
     }
-
 }
