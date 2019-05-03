@@ -1,15 +1,17 @@
 <?php
-use SimonMontoya\Container;
+
+
+
 require(__DIR__.'/../bootstrap/start.php');
 
 function teacherController()
 {
-    $access = Container::getInstance()->make('access');
-    if (!$access->check('teacher')) {
+    //$access = Container::getInstance()->make('access');
+    if (!Access::check('teacher')) {
         abort404();
     }
 
-    view('teachers', compact('access'));
+    view('teachers');
 }
 
 teacherController();

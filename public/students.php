@@ -1,15 +1,18 @@
 <?php
-use SimonMontoya\Container;
+
+
+
+
 require(__DIR__.'/../bootstrap/start.php');
 
 function studentController()
 {
-    $access = Container::getInstance()->make('access');
-    if (!$access->check('student')) {
+    //$access = Container::getInstance()->make('access');
+    if (!Access::check('student')) {
         abort404();
     }
 
-    view('students', compact('access'));
+    view('students');
 }
 
 return studentController();

@@ -7,7 +7,7 @@ use SimonMontoya\SessionManager;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-class_alias('SimonMontoya\AccessHandler', 'Access');
+class_alias('SimonMontoya\Facades\Access', 'Access');
 
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
