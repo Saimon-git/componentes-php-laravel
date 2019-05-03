@@ -39,6 +39,7 @@ class SingletonTest extends PHPUnit_Framework_TestCase
     }
 
 }
+
 class GreeterDummy
 {
     private static $instance;
