@@ -19,6 +19,7 @@ class ComposerStaticInit49bb9d55bf885283dfd2c5fc9daf6ac8
         ),
         'W' => 
         array (
+            'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
         'S' => 
@@ -26,6 +27,10 @@ class ComposerStaticInit49bb9d55bf885283dfd2c5fc9daf6ac8
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Yaml\\' => 23,
             'SimonMontoya\\' => 13,
+        ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
         ),
         'D' => 
         array (
@@ -39,6 +44,10 @@ class ComposerStaticInit49bb9d55bf885283dfd2c5fc9daf6ac8
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Whoops\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -56,6 +65,10 @@ class ComposerStaticInit49bb9d55bf885283dfd2c5fc9daf6ac8
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -63,13 +76,6 @@ class ComposerStaticInit49bb9d55bf885283dfd2c5fc9daf6ac8
     );
 
     public static $prefixesPsr0 = array (
-        'W' => 
-        array (
-            'Whoops' => 
-            array (
-                0 => __DIR__ . '/..' . '/filp/whoops/src',
-            ),
-        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -600,9 +606,6 @@ class ComposerStaticInit49bb9d55bf885283dfd2c5fc9daf6ac8
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
-        'Whoops\\Module' => __DIR__ . '/..' . '/filp/whoops/src/deprecated/Zend/Module.php',
-        'Whoops\\Provider\\Zend\\ExceptionStrategy' => __DIR__ . '/..' . '/filp/whoops/src/deprecated/Zend/ExceptionStrategy.php',
-        'Whoops\\Provider\\Zend\\RouteNotFoundStrategy' => __DIR__ . '/..' . '/filp/whoops/src/deprecated/Zend/RouteNotFoundStrategy.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

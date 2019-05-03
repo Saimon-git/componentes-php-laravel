@@ -12,6 +12,6 @@
     "mockery/mockery": "^0.9.4"
     },
     "require": {
-    "filp/whoops": "^1.1"
+    "filp/whoops": "2.*"
     }
 }

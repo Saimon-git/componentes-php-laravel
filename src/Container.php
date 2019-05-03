@@ -11,8 +11,23 @@ use ReflectionException;
 
 class Container
 {
+    protected static $instance;
     protected $shared = array();
     protected $bindings = array();
+
+    public static function getInstance()
+    {
+        if (static::$instance == null){
+            static::$instance = new Container();
+        }
+
+        return static::$instance;
+    }
+
+    public static function setInstance(Container $container)
+    {
+        static::$instance = $container;
+    }
 
     public function bind($name, $resolver, $shared = false)
     {
