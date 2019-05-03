@@ -98,7 +98,7 @@ class Container
                 /*$parameterDefault = new \ReflectionParameter();
                 $parameter = $parameterDefault->getDefaultValue();
                 $dependencies[] .= $parameter;*/
-                throw new ContainerException("Please provide value of  the parameter [$parameterName]");
+                 throw new ContainerException("Please provide value of  the parameter [$parameterName]");
             }
 
         }
