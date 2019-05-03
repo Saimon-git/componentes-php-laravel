@@ -1,9 +1,9 @@
 <?php
 
-use SimonMontoya\AccessHandler;
-use SimonMontoya\Authenticator;
-use SimonMontoya\SessionArrayDriver;
-use SimonMontoya\SessionManager;
+
+use SimonMontoya\Container;
+
+use SimonMontoya\Application;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -13,29 +13,17 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-$container = SimonMontoya\Container::getInstance();
+$container = Container::getInstance();
 
 \SimonMontoya\Facades\Access::setContainer($container);
 
-$container->singleton('session', function() {
+$application = new Application($container);
 
-    $data = array(
-        'user_data' => array(
-            'name' => 'Saimon',
-            'role' => 'teacher'
-        )
-    );
+//$application->register();
 
-    $driver = new SessionArrayDriver($data);
-
-    return new SessionManager($driver);
-});
-
-$container->singleton('auth', function($container) {
-   return new Authenticator($container->make('session'));
-});
-
-$container->singleton('access',function($container){
-    return new AccessHandler($container->make('auth'));
-});
+$application->registerProviders(array(
+    SimonMontoya\Providers\SessionProvider::class,
+    SimonMontoya\Providers\AuthenticatorProvider::class,
+    SimonMontoya\Providers\AuthorizationProvider::class
+));
 

@@ -4,7 +4,7 @@ namespace SimonMontoya;
 
 use Closure;
 
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 
 use ReflectionClass;
 use ReflectionException;
@@ -75,20 +75,19 @@ class Container
             $this->shared[$name] = $object;
         }
 
-        
-
         return $object;
     }
 
     public  function  build($name, array $arguments = array())
     {
-        try{
+       // var_dump($name);exit;
+       // try{
             $reflection = new ReflectionClass($name);
-        }catch (ReflectionException $e){
-            throw new ContainerException("". $e->getMessage(), null, $e);
-        }
-        if(!$reflection->isInstantiable())
-        {
+        //}catch (ReflectionException $e){
+       // {
+         //
+        //}
+        if (!$reflection->isInstantiable()){
             throw new InvalidArgumentException("$name is not instanciable");
         }
 
@@ -120,7 +119,7 @@ class Container
             if ($parameterClass != null){
                 $parameterClassName = $parameterClass->getName();
 
-                $dependencies[] = $this->build($parameterClassName);
+                $dependencies[] = $this->make($parameterClassName);
             }else{
                 /*$parameterDefault = new \ReflectionParameter();
                 $parameter = $parameterDefault->getDefaultValue();
