@@ -15,6 +15,8 @@ $whoops->register();
 
 $container = SimonMontoya\Container::getInstance();
 
+\SimonMontoya\Facades\Access::setContainer($container);
+
 $container->singleton('session', function() {
 
     $data = array(

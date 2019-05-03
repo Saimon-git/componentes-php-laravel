@@ -4,13 +4,13 @@
 namespace SimonMontoya\Facades;
 
 
-use SimonMontoya\Container;
+use Exception;
 
-class Access
+class Access extends Facade
 {
-    public static function check($roles)
+    public static function getAccessor()
     {
-        return Container::getInstance()->make('access')->check($roles);
+        return 'access';
     }
 
 }
